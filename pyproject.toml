@@ -1,0 +1,21 @@
+[project]
+name = "femtochat"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "datasets>=4.5.0",
+    "datatrove>=0.8.0",
+    "jupyter>=1.1.1",
+    "rustbpe>=0.1.0",
+    "tdqm>=0.0.1",
+    "tiktoken>=0.13.0",
+    "torch>=2.10.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "ruff>=0.16.0",
+]
