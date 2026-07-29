@@ -12,5 +12,8 @@ wheels/
 # Superpowers scratch state
 .superpowers/
 
+# macOS
+.DS_Store
+
 # Model checkpoints
 checkpoints/
