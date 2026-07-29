@@ -10,9 +10,9 @@ dependencies = [
     "jupyter>=1.1.1",
     "matplotlib>=3.11.1",
     "rustbpe>=0.1.0",
-    "tdqm>=0.0.1",
     "tiktoken>=0.13.0",
     "torch>=2.10.0",
+    "tqdm>=4.67.3",
 ]
 
 [dependency-groups]
