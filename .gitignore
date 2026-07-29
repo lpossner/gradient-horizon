@@ -11,3 +11,6 @@ wheels/
 
 # Superpowers scratch state
 .superpowers/
+
+# Model checkpoints
+checkpoints/
