@@ -15,5 +15,15 @@ wheels/
 # macOS
 .DS_Store
 
-# Model checkpoints
-checkpoints/
+# Project data
+data/
+FineWeb-edu_sample_10BT/
+
+# Training output
+output/
+
+# Secrets
+.env
+
+# WandDB
+wandb/
