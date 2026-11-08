@@ -225,9 +225,6 @@ exclude:
   - purgecss.js
   - "*.config.js"
   - "package*.json"
-  # Stray root 404.html left over from the minima theme; the Chirpy gem
-  # already provides assets/404.html at permalink /404.html.
-  - 404.html
 
 jekyll-archives:
   enabled: [categories, tags]
