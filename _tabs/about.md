@@ -4,12 +4,6 @@ icon: fas fa-info-circle
 order: 4
 ---
 
-I'm an electrical engineer by training who got into machine learning in January 2023, and I write here about understanding LLMs from the ground up.
+I was trained as an electrical engineer and got into machine learning in January 2023 just a few months after ChatGPT was released. I approached the topic by understanding and implementing basic algorithms on my own: linear regression, decision trees, SVMs, as well as feed-forward and convolutional neural networks. I am fascinated (and occasionally unsettled) by the capabilities that LLMs and other transformer-based models have demonstrated in recent years. Find me on [GitHub](https://github.com/lpossner).
 
-This blog follows **Femtochat**, a side project that aims to be a simpler version of [Nanochat](https://github.com/karpathy/nanochat). Rather than copying an existing implementation, I'm building a transformer-based LLM from scratch in a more educational flavor and at lower complexity — partly to understand how these models actually work under the hood, and partly because writing about it creates the external pressure to keep going.
-
-Expect notes on the training process, things I got wrong, and results as they arrive.
-
-### Elsewhere
-
-Find me on [GitHub](https://github.com/lpossner).
+This blog follows **Femtochat** which is a side project that aims to be a simpler version of [Nanochat](https://github.com/karpathy/nanochat). My goal is to create a version which is educational and has lower complexity. Expect notes on the training process, things I got wrong, and results as they arrive.
