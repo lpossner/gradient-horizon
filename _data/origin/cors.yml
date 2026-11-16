@@ -1,0 +1,13 @@
+# Overrides for the Chirpy theme's CDN asset URLs (theme: _data/origin/cors.yml).
+#
+# Jekyll deep-merges site data over theme data, so only the keys below are
+# replaced; every other library keeps the theme's value.
+#
+# mermaid is pinned to an exact version on purpose. Chirpy ships `mermaid@11`,
+# a floating major range, so the theme's `post.min.js` -- which drives rendering
+# via the long-deprecated `mermaid.init()` -- silently changes when jsdelivr
+# republishes that range. Pinning keeps the renderer on a version known to work
+# with the diagrams in _posts. Bump deliberately, then rebuild and check.
+
+mermaid:
+  js: https://cdn.jsdelivr.net/npm/mermaid@11.17.2/dist/mermaid.min.js
