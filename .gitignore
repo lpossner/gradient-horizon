@@ -29,3 +29,32 @@ assets/js/dist
 *~
 .DS_Store
 Thumbs.db
+
+# --- femtochat ---
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+.ruff_cache/
+
+# Virtual environments
+.venv
+
+# Superpowers scratch state
+.superpowers/
+
+# Project data
+data/
+FineWeb-edu_sample_10BT/
+
+# Training output
+output/
+
+# Secrets
+.env
+
+# WandDB
+wandb/
