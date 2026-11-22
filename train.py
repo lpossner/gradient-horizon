@@ -60,15 +60,25 @@ WEIGHT_DECAY: float = 0.1
 # ablation run is meant to start from scratch, not resume across configs.
 PROFILE_DEFAULTS: dict[str, dict[str, int]] = {
     "full": {
-        "ctx_len": 1024,
-        "emb_dim": 512,
-        "n_heads": 8,
-        "n_layers": 12,
+        # Shrunk from the original 1024/512/8/12/batch=24 notebook numbers --
+        # those OOM'd MPS on this Mac's 16GB unified memory. Still clearly
+        # deeper/wider than "dry" (enough for the depth-dependent ablations
+        # to show real instability), just sized to actually fit.
+        "ctx_len": 512,
+        "emb_dim": 384,
+        "n_heads": 6,
+        "n_layers": 8,
+        # Measured ~18.6s/step on this Mac at batch_size=8/grad_accum=15.
+        # 300 steps (~1.5hr/run) was too short for cosine decay to show its
+        # benefit or for fragile ablations (no-attn-scale, no-residual) to
+        # diverge -- bumped to 1000 steps (~5.2hr/run, ~31hr for the 6
+        # full-profile sweep entries) for real signal without a multi-day
+        # commitment.
         "warmup_steps": 100,
-        "max_steps": 2000,
-        "eval_freq": 200,
+        "max_steps": 1000,
+        "eval_freq": 250,
         "eval_iters": 20,
-        "batch_size": 24,
+        "batch_size": 8,
         "grad_accum_steps": 15,
     },
     "dry": {
@@ -102,6 +112,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--min-lr", type=float, default=5e-5)
     parser.add_argument("--warmup-steps", type=int, default=None)
     parser.add_argument("--grad-clip", type=float, default=1.0)
+    parser.add_argument(
+        "--max-steps",
+        type=int,
+        default=None,
+        help="override the profile's step count, e.g. for a short diagnostic "
+        "run before committing to a full-length comparison",
+    )
 
     # Ablation switches (see docstrings on the flags below for what each
     # tests).
@@ -130,6 +147,20 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--lr-schedule", choices=["cosine", "constant"], default="cosine")
     parser.add_argument("--init-std", type=float, default=0.02)
+    parser.add_argument(
+        "--n-heads",
+        type=int,
+        default=None,
+        help="override the profile's head count -- shrinking it (same emb_dim) "
+        "raises head_dim, for stress-testing attention scaling",
+    )
+    parser.add_argument(
+        "--n-layers",
+        type=int,
+        default=None,
+        help="override the profile's layer count -- raising it stress-tests "
+        "depth-dependent effects like post-norm instability",
+    )
     parser.add_argument(
         "--n-kv-heads",
         type=int,
@@ -164,8 +195,14 @@ def parse_args() -> argparse.Namespace:
 
     if args.warmup_steps is None:
         args.warmup_steps = PROFILE_DEFAULTS[args.profile]["warmup_steps"]
+    if args.max_steps is None:
+        args.max_steps = PROFILE_DEFAULTS[args.profile]["max_steps"]
+    if args.n_heads is None:
+        args.n_heads = PROFILE_DEFAULTS[args.profile]["n_heads"]
+    if args.n_layers is None:
+        args.n_layers = PROFILE_DEFAULTS[args.profile]["n_layers"]
     if args.n_kv_heads is None:
-        args.n_kv_heads = PROFILE_DEFAULTS[args.profile]["n_heads"]
+        args.n_kv_heads = args.n_heads
 
     return args
 
@@ -1173,8 +1210,8 @@ def main() -> None:
             vocab_size=encoding.n_vocab,
             ctx_len=profile_defaults["ctx_len"],
             emb_dim=profile_defaults["emb_dim"],
-            n_heads=profile_defaults["n_heads"],
-            n_layers=profile_defaults["n_layers"],
+            n_heads=args.n_heads,
+            n_layers=args.n_layers,
         )
         model = GPT(gpt_config, args).to(device)
 
@@ -1217,7 +1254,7 @@ def main() -> None:
             tokenizer_state,
             args.checkpoint_path,
             args,
-            max_steps=profile_defaults["max_steps"],
+            max_steps=args.max_steps,
             eval_freq=profile_defaults["eval_freq"],
             eval_iters=profile_defaults["eval_iters"],
             grad_accum_steps=profile_defaults["grad_accum_steps"],

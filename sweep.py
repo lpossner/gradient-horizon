@@ -49,6 +49,14 @@ RUNS: list[dict] = [
         "flags": {"init_std": 0.002},
     },
     {
+        # 1/sqrt(emb_dim) for the dry profile's emb_dim=128 -- the fan-in
+        # formula GPT-2's flat 0.02 only approximates for its own (much
+        # wider) model sizes. Compare against "baseline" (std=0.02, same
+        # profile) to see whether the formula converges faster.
+        "label": "init-std-formula",
+        "flags": {"init_std": 0.08838834764831845},
+    },
+    {
         "label": "l2-weight-decay",
         "profile": "full",
         "flags": {"weight_decay_mode": "l2"},
