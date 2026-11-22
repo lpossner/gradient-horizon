@@ -30,7 +30,7 @@ The five failure modes most likely to bite, each pinned to the task that owns it
 2. **A push that silently breaks the kernel chain** by dropping `dataset_sources`/`kernel_sources`. → Task 4, Step 6.
 3. **Jekyll building or serving `femtochat/`** — most visibly the notebooks, which would be published as raw files. → Task 1, Step 4; Task 3, Step 4; Task 6, Step 2.
 4. **`output` pointed at a tokenize kernel**, pulling ~264 MB of corpus that nobody wants. → Task 4, Step 4.
-5. **A figure referenced without `relative_url`**, so images 404 on the `/gradient-horizon` baseurl but look fine locally. → Task 5, Steps 1 and 2.
+5. **A figure referenced *with* `relative_url`**, which doubles the baseurl and 404s in production — the opposite of the usual Jekyll advice, because Chirpy's `media-url.html` already prepends it. → Task 5, Steps 1 and 2.
 
 ---
 
@@ -458,10 +458,10 @@ Proves the figure path end to end before the sweep post depends on it.
 Insert into the post body:
 
 ```markdown
-![Optimizer, initialization & weight tying]({{ '/assets/img/femtochat/sweep_optimizer_init.png' | relative_url }})
+![Optimizer, initialization & weight tying](/assets/img/femtochat/sweep_optimizer_init.png)
 ```
 
-The `relative_url` filter is what applies the `/gradient-horizon` baseurl. A bare `/assets/...` path 404s in production while looking correct locally — Review Focus #5.
+**Use a bare path, not `relative_url`.** Chirpy post-processes every post image through `_includes/media-url.html`, which prepends the baseurl itself, so a bare path already gets `/gradient-horizon` exactly once. Adding `relative_url` produces `/gradient-horizon/gradient-horizon/assets/...`, which 404s in production. This was measured against a real build rather than assumed. To re-test after a theme upgrade, build with `--drafts` and read the rendered `src`.
 
 - [ ] **Step 2: Build and confirm the image is served**
 
