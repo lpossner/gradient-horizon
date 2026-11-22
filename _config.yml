@@ -16,10 +16,10 @@ timezone:
 
 title: Gradient Horizon # the main title
 
-tagline: Machine learning, LLMs, and building things from scratch. # it will display as the subtitle
+tagline: Building a chat model from scratch. # it will display as the subtitle
 
 description: >- # used by seo meta and the atom feed
-  A blog about machine learning, LLMs, and building things from scratch.
+  A blog about **Femtochat**, a chat model built from scratch.
 
 # Fill in the protocol & hostname for your site.
 # E.g. 'https://username.github.io', note that it does not end with a '/'.
