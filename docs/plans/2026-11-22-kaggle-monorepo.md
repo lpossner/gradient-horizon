@@ -485,7 +485,7 @@ Expected: htmlproofer passes. A broken image path fails here.
 
 ```bash
 git add _posts/
-git commit -m "Embed a sweep figure via relative_url"
+git commit -m "Embed a sweep figure in a draft post"
 ```
 
 ---

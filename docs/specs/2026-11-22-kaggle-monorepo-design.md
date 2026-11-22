@@ -171,6 +171,21 @@ the local file against the last-pulled copy (recorded as a hash in the
 kernel dir) and against Kaggle's current version; if both moved, it stops
 and names both.
 
+**It fails closed.** Any condition that prevents the comparison from
+running is treated as a conflict, never as "no conflict":
+
+- `push` when Kaggle's copy cannot be read (network, auth, rate limit) —
+  refuses, because a failure to *verify* is not evidence of agreement.
+- `push` when no baseline hash is recorded — refuses, since without it
+  there is nothing to compare against.
+- `pull` when the local notebook has unpushed edits — refuses, so a pull
+  cannot silently discard work done locally.
+
+Hashes are computed over the notebook's parsed JSON with sorted keys and
+canonical separators, not over raw bytes: the Kaggle CLI re-serialises a
+notebook when it serves it, so a byte hash would report a phantom
+"both sides changed" immediately after a successful push.
+
 ### `sync_kaggle.sh`
 
 Subcommands, all taking a kernel name (or `all`):
@@ -209,12 +224,18 @@ Behaviour that matters:
 
 `make_figures.py` keeps writing `femtochat/figures/*.png` — unchanged, so
 `REPORT.md`'s relative links keep working. `sync_kaggle.sh figures` copies
-them to `assets/img/femtochat/`. Posts reference them with Jekyll's
-`relative_url` filter so the `/gradient-horizon` baseurl is applied:
+them to `assets/img/femtochat/`. Posts reference them by bare path:
 
 ```
-![Optimizer, initialization & weight tying]({{ '/assets/img/femtochat/sweep_optimizer_init.png' | relative_url }})
+![Optimizer, initialization & weight tying](/assets/img/femtochat/sweep_optimizer_init.png)
 ```
+
+**Not `relative_url`.** This design originally specified the `relative_url`
+filter, which is wrong for this theme: Chirpy post-processes every post
+image through `_includes/media-url.html`, which prepends the baseurl
+itself, so `relative_url` produces `/gradient-horizon/gradient-horizon/...`
+and 404s. A bare path gets the baseurl exactly once. Measured against a
+real build during execution; see the plan's ledger, Ruling 8.
 
 Figures are tracked in both locations: `femtochat/figures/` is the artefact
 `REPORT.md` embeds, `assets/img/femtochat/` is what Jekyll serves. The copy
