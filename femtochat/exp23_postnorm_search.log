@@ -1,0 +1,106 @@
+=== POST-NORM n_layers=16, LR=0.05, no warmup, no clip ===
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /Users/lpossner/Projects/femtochat/wandb/offline-run-20261016_012017-r5q3g45h
+wandb: View this run in the terminal with `wandb leet`
+wandb: 
+wandb: Run history:
+wandb:         train/grad_norm █▄▃▂▁▂▂▁▂▂▂▁▂▂▂▂▁▂▂▂▂▃▂▃▂▁▂▁▃▁▂▁▂▂▁▁▁▂▁▁
+wandb:              train/loss █▆▅▅▄▂▂▂▁▂▂▂▂▂▁▁▁▂▂▂▂▂▂▂▁▂▂▂▂▂▁▁▂▁▂▂▁▁▁▂
+wandb:                train/lr █████████▇▇▇▇▇▇▇▆▆▆▅▅▅▅▄▄▄▃▃▃▃▂▂▂▂▂▁▁▁▁▁
+wandb:          train/progress ▁▁▁▁▂▂▂▂▂▃▃▃▃▄▄▅▅▅▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇▇▇▇███
+wandb:       train/tokens_seen ▁▁▁▁▂▂▂▃▃▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▇▇▇▇▇▇▇███
+wandb:    update_ratio/block_0 █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: update_ratio/block_last ▂▆█▇▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    update_ratio/tok_emb █▅▄▃▃▂▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                val/loss █▇▁▁
+wandb: 
+wandb: Run summary:
+wandb:         train/grad_norm 0.09526
+wandb:              train/loss 7.5424
+wandb:                train/lr 5e-05
+wandb:          train/progress 100
+wandb:       train/tokens_seen 1638400
+wandb:    update_ratio/block_0 0
+wandb: update_ratio/block_last 0.0
+wandb:    update_ratio/tok_emb 0.0
+wandb:                val/loss 7.61162
+wandb:              val/sample <|EOT|>The. to and a...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /Users/lpossner/Projects/femtochat/wandb/offline-run-20261016_012017-r5q3g45h
+wandb: Find logs at: ./wandb/offline-run-20261016_012017-r5q3g45h/logs
+Using mps device (profile=dry).
+Finished run 'femtochat-dry-search-postnorm-16-20261016-012016', checkpoint=None
+
+=== POST-NORM n_layers=32, LR=0.05, no warmup, no clip ===
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /Users/lpossner/Projects/femtochat/wandb/offline-run-20261016_012606-7p3pcagx
+wandb: View this run in the terminal with `wandb leet`
+wandb: 
+wandb: Run history:
+wandb:         train/grad_norm █▇▅▄▂▂▁▂▂▂▂▂▂▁▃▁▁▂▃▂▁▃▁▂▃▃▁▁▂▂▃▂▂▁▁▂▁▁▂▁
+wandb:              train/loss ▆▅█▄▃▂▂▂▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                train/lr █████████▇▇▇▆▆▆▆▆▆▆▅▅▅▄▄▄▃▃▃▃▃▃▂▂▂▂▁▁▁▁▁
+wandb:          train/progress ▁▁▁▂▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▆▆▇▇▇▇▇██
+wandb:       train/tokens_seen ▁▂▂▂▂▃▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇█████
+wandb:    update_ratio/block_0 █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: update_ratio/block_last █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    update_ratio/tok_emb █▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                val/loss ██▂▁
+wandb: 
+wandb: Run summary:
+wandb:         train/grad_norm 0.05665
+wandb:              train/loss 7.58697
+wandb:                train/lr 5e-05
+wandb:          train/progress 100
+wandb:       train/tokens_seen 1638400
+wandb:    update_ratio/block_0 0
+wandb: update_ratio/block_last 0.0
+wandb:    update_ratio/tok_emb 0.0
+wandb:                val/loss 7.61148
+wandb:              val/sample <|EOT|>The. to and a...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /Users/lpossner/Projects/femtochat/wandb/offline-run-20261016_012606-7p3pcagx
+wandb: Find logs at: ./wandb/offline-run-20261016_012606-7p3pcagx/logs
+Using mps device (profile=dry).
+Finished run 'femtochat-dry-search-postnorm-32-20261016-012606', checkpoint=None
+
+=== POST-NORM n_layers=48, LR=0.05, no warmup, no clip ===
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /Users/lpossner/Projects/femtochat/wandb/offline-run-20261016_013522-1jq7ze2o
+wandb: View this run in the terminal with `wandb leet`
+wandb: 
+wandb: Run history:
+wandb:         train/grad_norm █▇▄▃▃▃▂▂▃▂▄▁▃▄▅▃▃▅▄▂▅▅▄▃▁▁▂▂▁▂▃▃▂▁▁▁▂▁▁▂
+wandb:              train/loss █▂▃▂▂▂▃▂▂▂▂▁▂▁▂▂▂▂▂▂▂▂▁▁▁▁▂▁▁▁▂▁▁▂▂▁▂▂▂▁
+wandb:                train/lr ███████▇▇▆▆▆▆▆▆▅▅▅▅▅▄▄▃▃▃▃▃▂▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:          train/progress ▁▁▁▂▂▂▂▂▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇█████
+wandb:       train/tokens_seen ▁▁▁▁▁▁▂▂▂▂▂▃▃▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▇▇▇▇▇▇███
+wandb:    update_ratio/block_0 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: update_ratio/block_last █▇▆▂▃▂▃▂▁▃▂▂▂▂▁▂▃▃▂▂▂▁▁▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    update_ratio/tok_emb ██▃▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                val/loss █▆▂▁
+wandb: 
+wandb: Run summary:
+wandb:         train/grad_norm 0.11391
+wandb:              train/loss 7.64055
+wandb:                train/lr 5e-05
+wandb:          train/progress 100
+wandb:       train/tokens_seen 1638400
+wandb:    update_ratio/block_0 0
+wandb: update_ratio/block_last 0.0
+wandb:    update_ratio/tok_emb 0.0
+wandb:                val/loss 7.611
+wandb:              val/sample <|EOT|>The. to and a...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /Users/lpossner/Projects/femtochat/wandb/offline-run-20261016_013522-1jq7ze2o
+wandb: Find logs at: ./wandb/offline-run-20261016_013522-1jq7ze2o/logs
+Using mps device (profile=dry).
+Finished run 'femtochat-dry-search-postnorm-48-20261016-013521', checkpoint=None
+
+=== POSTNORM_SEARCH_DONE ===

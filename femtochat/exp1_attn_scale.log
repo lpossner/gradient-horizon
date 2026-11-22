@@ -1,0 +1,69 @@
+=== exp1a: scaled attention, head_dim=192 ===
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /Users/lpossner/Projects/femtochat/wandb/offline-run-20261015_164101-rnbxqg6f
+wandb: View this run in the terminal with `wandb leet`
+wandb: 
+wandb: Run history:
+wandb:         train/grad_norm █▅▄▄▄▄▃▃▂▂▁▁▁▃▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:              train/loss ████▆▆▆▆▅▅▄▄▄▄▃▃▃▃▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                train/lr ▁▁▂▂▂▄▄▄▄▆▇▇▇████████▆▆▆▆▅▅▅▄▄▃▃▃▂▂▂▂▁▁▁
+wandb:          train/progress ▁▁▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▅▅▅▅▅▅▅▅▆▆▆▆▇▇▇▇▇▇▇▇██
+wandb:       train/tokens_seen ▁▁▁▁▁▂▂▂▂▂▂▂▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▆▇▇▇▇▇▇████
+wandb:    update_ratio/block_0 ▁▁▁▁▁▁▁▁▁▁▂▂▂▂▃▄▅▇▇▅▅▆▅▆█▅▅▅▄▅▄▄▃▃▂▂▂▁▁▁
+wandb: update_ratio/block_last ▁▂▃▃▂▂▂▁▁▁▁▂▂▄▃▄█▆▆▅▄▅▅▄▄▄▄▄▃▃▃▂▂▂▂▁▁▁▁▁
+wandb:    update_ratio/tok_emb ▃▅▆▆█▅▆▄▆▆▆▆▅▇▅▅▅▄▄▃▃▃▃▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁
+wandb:                val/loss █▁
+wandb: 
+wandb: Run summary:
+wandb:         train/grad_norm 0.24872
+wandb:              train/loss 6.08731
+wandb:                train/lr 5e-05
+wandb:          train/progress 100
+wandb:       train/tokens_seen 18432000
+wandb:    update_ratio/block_0 0.0
+wandb: update_ratio/block_last 0.0
+wandb:    update_ratio/tok_emb 0.0
+wandb:                val/loss 6.09585
+wandb:              val/sample <|EOT|>The world in ...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /Users/lpossner/Projects/femtochat/wandb/offline-run-20261015_164101-rnbxqg6f
+wandb: Find logs at: ./wandb/offline-run-20261015_164101-rnbxqg6f/logs
+Using mps device (profile=full).
+Finished run 'femtochat-full-attn-scale-control-20261015-164101', checkpoint=None
+=== exp1b: unscaled attention, head_dim=192 ===
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /Users/lpossner/Projects/femtochat/wandb/offline-run-20261015_181128-w06wi2nx
+wandb: View this run in the terminal with `wandb leet`
+wandb: 
+wandb: Run history:
+wandb:         train/grad_norm █▆▆▅▅▅▅▅▅▃▂▁▁▁▁▁▂▁▁▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁
+wandb:              train/loss █▇▇▅▅▄▄▄▄▄▃▃▂▂▂▂▂▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                train/lr ▁▂▂▂▄▆▆▆▇▇▇████████▇▇▇▆▆▆▅▄▄▄▃▃▃▃▃▃▂▂▂▂▂
+wandb:          train/progress ▁▁▁▂▂▂▂▂▂▂▃▃▃▃▄▄▄▄▄▅▅▆▆▆▆▆▇▇▇▇▇▇▇███████
+wandb:       train/tokens_seen ▁▁▁▁▁▁▁▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▅▆▆▆▇▇▇▇▇████
+wandb:    update_ratio/block_0 ▁▁▁▁▁▁▃▂▃▆▆▆▅██▆▅▅▇▅▄▄▃▃▃▂▂▂▂▂▂▂▂▂▂▁▂▁▂▁
+wandb: update_ratio/block_last ▁▁▂▄▂▂▁▂▂▃▄█▃▅▄▄▅▄▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▁▁▁▁▁
+wandb:    update_ratio/tok_emb ▁▃▃▄▆▇▇██▄▃▄▃▄▆▄▅▄▅▄▄▄▃▄▃▃▃▃▃▃▂▂▂▂▂▁▁▁▁▁
+wandb:                val/loss █▁
+wandb: 
+wandb: Run summary:
+wandb:         train/grad_norm 0.33901
+wandb:              train/loss 6.25803
+wandb:                train/lr 5e-05
+wandb:          train/progress 100
+wandb:       train/tokens_seen 18432000
+wandb:    update_ratio/block_0 0.0
+wandb: update_ratio/block_last 0.0
+wandb:    update_ratio/tok_emb 0.0
+wandb:                val/loss 6.26469
+wandb:              val/sample <|EOT|>The In Bit, t...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /Users/lpossner/Projects/femtochat/wandb/offline-run-20261015_181128-w06wi2nx
+wandb: Find logs at: ./wandb/offline-run-20261015_181128-w06wi2nx/logs
+Using mps device (profile=full).
+Finished run 'femtochat-full-attn-noscale-stress-20261015-181128', checkpoint=None
+=== EXP1_DONE ===
