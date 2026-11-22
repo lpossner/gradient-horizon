@@ -220,6 +220,7 @@ exclude:
   - "*.gemspec"
   - docs
   - tools
+  - femtochat
   - README.md
   - LICENSE
   - purgecss.js
