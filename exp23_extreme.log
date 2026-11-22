@@ -1,0 +1,33 @@
+wandb: Tracking run with wandb version 0.28.1
+wandb: W&B syncing is set to `offline` in this directory. Run `wandb online` or set WANDB_MODE=online to enable cloud syncing.
+wandb: Run data is saved locally in /Users/lpossner/Projects/femtochat/wandb/offline-run-20261016_014832-afb8s9tk
+wandb: View this run in the terminal with `wandb leet`
+wandb: 
+wandb: Run history:
+wandb:         train/grad_norm ▂▄█▄▃▃▄▃▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:              train/loss █▅▄▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                train/lr █████▇▇▇▇▇▆▆▆▅▅▅▅▅▅▄▃▃▃▃▃▃▂▂▂▂▂▂▂▁▁▁▁▁▁▁
+wandb:          train/progress ▁▁▁▂▂▂▂▂▃▃▃▃▃▃▃▄▄▄▄▄▄▄▅▅▅▅▆▆▆▆▇▇▇▇▇▇▇███
+wandb:       train/tokens_seen ▁▁▁▁▂▂▂▂▂▂▂▃▃▃▃▃▃▃▃▃▃▄▄▄▅▅▅▅▅▆▆▆▆▇▇▇▇▇▇█
+wandb:    update_ratio/block_0 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: update_ratio/block_last █▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    update_ratio/tok_emb ▃█▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:                val/loss █▇▃▁
+wandb: 
+wandb: Run summary:
+wandb:         train/grad_norm 0.23069
+wandb:              train/loss 7.64491
+wandb:                train/lr 7e-05
+wandb:          train/progress 100
+wandb:       train/tokens_seen 1638400
+wandb:    update_ratio/block_0 0
+wandb: update_ratio/block_last 0.0
+wandb:    update_ratio/tok_emb 0.0
+wandb:                val/loss 7.60745
+wandb:              val/sample <|EOT|>The. to and a...
+wandb: 
+wandb: You can sync this run to the cloud by running:
+wandb: wandb sync /Users/lpossner/Projects/femtochat/wandb/offline-run-20261016_014832-afb8s9tk
+wandb: Find logs at: ./wandb/offline-run-20261016_014832-afb8s9tk/logs
+Using mps device (profile=dry).
+Finished run 'femtochat-dry-search-extreme-combo-20261016-014831', checkpoint=None
