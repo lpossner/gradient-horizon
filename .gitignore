@@ -30,6 +30,9 @@ assets/js/dist
 .DS_Store
 Thumbs.db
 
+# Playwright session captures
+.playwright-mcp/
+
 # --- femtochat ---
 # Python-generated files
 __pycache__/

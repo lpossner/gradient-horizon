@@ -8,7 +8,7 @@
 # notebooks and nothing else, plus a mechanical copy of generated figures.
 #
 # Usage:
-#   sync_kaggle.sh pull   <kernel>|all   Kaggle -> femtochat/notebooks/<kernel>/
+#   sync_kaggle.sh pull   <kernel>|all   Kaggle -> femtochat/_archive/notebooks/<kernel>/
 #   sync_kaggle.sh push   <kernel>|all   local -> Kaggle  (this also RUNS it)
 #   sync_kaggle.sh status <kernel>|all   latest run status
 #   sync_kaggle.sh output <kernel>       run outputs -> femtochat/output/<kernel>/
@@ -28,7 +28,7 @@
 set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-NOTEBOOKS_DIR="$REPO_ROOT/femtochat/notebooks"
+NOTEBOOKS_DIR="$REPO_ROOT/femtochat/_archive/notebooks"
 # Fetched kernel outputs land here, one directory per kernel.
 OUTPUT_DIR="$REPO_ROOT/femtochat/output"
 # Per-post folders are named <YYYY-MM-DD|placeholder>-<post>. Figures live
@@ -141,7 +141,7 @@ PY
 }
 
 # Hash of the notebook as Kaggle currently serves it. Pulls into a temp dir
-# and discards it -- nothing is written into notebooks/ except by `pull`.
+# and discards it -- nothing is written into _archive/notebooks/ except by `pull`.
 remote_notebook_hash() {
   local kernel="$1" ref tmp nb h
   ref="$(kernel_ref "$kernel")" || return 1
@@ -199,11 +199,11 @@ cmd_pull() {
   fi
 
   if [[ "$DRY_RUN" == "1" ]]; then
-    echo "dry run: would pull $ref into femtochat/notebooks/$kernel"
+    echo "dry run: would pull $ref into femtochat/_archive/notebooks/$kernel"
     return 0
   fi
 
-  echo "pulling $ref -> femtochat/notebooks/$kernel"
+  echo "pulling $ref -> femtochat/_archive/notebooks/$kernel"
   kaggle_quiet kernels pull "$ref" -p "$NOTEBOOKS_DIR/$kernel" -m
   # The freshly pulled notebook is now the agreed state.
   file_hash "$nb" > "$base_file"
@@ -264,11 +264,11 @@ cmd_push() {
   fi
 
   if [[ "$DRY_RUN" == "1" ]]; then
-    echo "dry run: would push $ref from femtochat/notebooks/$kernel (and start a run)"
+    echo "dry run: would push $ref from femtochat/_archive/notebooks/$kernel (and start a run)"
     return 0
   fi
 
-  echo "pushing $ref from femtochat/notebooks/$kernel (this also starts a run)"
+  echo "pushing $ref from femtochat/_archive/notebooks/$kernel (this also starts a run)"
   kaggle kernels push -p "$NOTEBOOKS_DIR/$kernel"
 
   # Kaggle may normalise the notebook on ingest, so record the agreed state

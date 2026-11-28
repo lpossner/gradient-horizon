@@ -1124,6 +1124,10 @@ def init_wandb(model, gpt_config: GPTConfig, args, run_name: str, eval_freq: int
         name=run_name,
         group=args.wandb_group,
         mode="offline",
+        # wandb writes its per-run directories into <dir>/wandb/, so this puts
+        # them under this post's output/ instead of whatever directory the
+        # script happened to be launched from.
+        dir=OUTPUT_DIR,
         config={
             **asdict(gpt_config),
             **vars(args),
