@@ -9,7 +9,7 @@ it is published except the figures copied into `assets/`.
 ```
 _posts/                     published posts
 _drafts/                    unpublished posts
-assets/img/femtochat/       plots the blog serves — a COPY, not the source
+assets/img/femtochat/<post>/  plots the blog serves — a COPY, not the source
 docs/                       specs, plans, roadmap
 tools/sync_kaggle.sh        Kaggle notebook sync + figure copy
 tools/run.sh, test.sh       Jekyll serve / build + htmlproofer
@@ -27,8 +27,8 @@ Per-post folders hold the code, results and figures that post discusses:
 ## Figures are generated, never hand-edited
 
 The chain is **tensorboard events → `make_figures.py` → `<post>/output/figures/`
-→ `assets/img/femtochat/` → published site.** Only the third arrow needs running
-by hand; the deploy workflow does it before every build.
+→ `assets/img/femtochat/<post>/` → published site.** Only the third arrow needs
+running by hand; the deploy workflow does it before every build.
 
 - Never edit a PNG in `assets/img/femtochat/`. Edit the plotting code and
   regenerate. A hand-touched plot is overwritten on the next build.
@@ -48,9 +48,9 @@ bare relative paths. `train.py` honours `FEMTOCHAT_INPUT_DIR` and
 `FEMTOCHAT_OUTPUT_DIR`; that is how the Kaggle notebook points at
 `/kaggle/input` and `/kaggle/working` without editing the code.
 
-`sync_kaggle.sh` finds figures by globbing `femtochat/*/output/figures` — the
-first match wins, so it is not post-aware. A second post with figures needs that
-changed before its plots can be copied.
+`sync_kaggle.sh figures` globs `femtochat/*/output/figures` and mirrors each
+into `assets/img/femtochat/<same folder name>/`, so several posts can have
+plots without colliding. Posts reference them by that full path.
 
 ## Kaggle
 

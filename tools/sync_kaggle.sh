@@ -12,7 +12,7 @@
 #   sync_kaggle.sh push   <kernel>|all   local -> Kaggle  (this also RUNS it)
 #   sync_kaggle.sh status <kernel>|all   latest run status
 #   sync_kaggle.sh output <kernel>       run outputs -> femtochat/output/<kernel>/
-#   sync_kaggle.sh figures               femtochat/figures/*.png -> assets/img/femtochat/
+#   sync_kaggle.sh figures               <post>/output/figures/*.png -> assets/img/femtochat/<post>/
 #
 # Options:
 #   -f, --force    push: skip the both-sides-changed check
@@ -32,11 +32,12 @@ NOTEBOOKS_DIR="$REPO_ROOT/femtochat/_archive/notebooks"
 # Fetched kernel outputs land here, one directory per kernel.
 OUTPUT_DIR="$REPO_ROOT/femtochat/output"
 # Per-post folders are named <YYYY-MM-DD|placeholder>-<post>. Figures live
-# beside the code that produced them, under that post's output/figures/.
-# Nothing here is post-specific: the first one that has plots wins, so a
-# second post needs no change to this script.
-FIGURES_SRC="$(ls -d "$REPO_ROOT"/femtochat/*/output/figures 2>/dev/null | head -n 1)"
-FIGURES_DST="$REPO_ROOT/assets/img/femtochat"
+# beside the code that produced them, under that post's output/figures/, and
+# are mirrored to assets/img/femtochat/<same folder name>/ so the blog can
+# tell two posts' plots apart. Every post with plots is copied, so a second
+# post needs no change to this script.
+FIGURES_ROOT="$REPO_ROOT/femtochat"
+FIGURES_DST_ROOT="$REPO_ROOT/assets/img/femtochat"
 
 # Kernels this script manages. The two superseded kernels
 # (train-fineweb-edu-sample-10bt, tokenize-fineweb-sample-10bt) are
@@ -305,15 +306,19 @@ cmd_output() {
 }
 
 cmd_figures() {
-  local f n=0
-  mkdir -p "$FIGURES_DST"
+  local n=0 post src dst
   shopt -s nullglob
-  for f in "$FIGURES_SRC"/*.png; do
-    cp "$f" "$FIGURES_DST/"
-    n=$((n + 1))
+  for src in "$FIGURES_ROOT"/*/output/figures; do
+    post="$(basename "$(dirname "$(dirname "$src")")")"
+    dst="$FIGURES_DST_ROOT/$post"
+    mkdir -p "$dst"
+    for f in "$src"/*.png; do
+      cp "$f" "$dst/"
+      n=$((n + 1))
+    done
   done
   shopt -u nullglob
-  echo "copied $n figure(s) to assets/img/femtochat"
+  echo "copied $n figure(s) to assets/img/femtochat/"
 }
 
 SUBCOMMAND=""

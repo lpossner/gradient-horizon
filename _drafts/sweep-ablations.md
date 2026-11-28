@@ -7,9 +7,10 @@ description: "Pretraining ablations on femtochat: what each optimizer, initializ
 ---
 
 > Draft scaffold. The prose below is a placeholder — this file exists so the
-> figure path (`make_figures.py` → `femtochat/figures/` →
-> `assets/img/femtochat/` → this post) is proven before the real post is
-> written. The numbers live in `femtochat/REPORT.md`.
+> figure path (`make_figures.py` → `femtochat/<post>/output/figures/` →
+> `assets/img/femtochat/<post>/` → this post) is proven before the real post is
+> written. The numbers live in
+> `femtochat/xxxx-xx-xx-pretraining-ablations-of-femtochat/REPORT.md`.
 
 ## Introduction
 
@@ -18,7 +19,7 @@ regenerated from the training event files by `make_figures.py`.
 
 ## Optimizer and initialization
 
-![Optimizer, initialization & weight tying](/assets/img/femtochat/sweep_optimizer_init.png)
+![Optimizer, initialization & weight tying](/assets/img/femtochat/xxxx-xx-xx-pretraining-ablations-of-femtochat/sweep_optimizer_init.png)
 
 ## Closing
 
