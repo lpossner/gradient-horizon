@@ -104,5 +104,3 @@ render as `×` and `·`.
 
 - Verified with a local harness that mimics `post.min.js` exactly, so these
   renders match what readers get rather than approximating it.
-- `fig2-dark-zoom.png` in the working tree is an untracked leftover capture
-  (near-blank dark frame) from earlier work; not touched by this change.
