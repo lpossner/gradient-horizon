@@ -1,6 +1,7 @@
 """Render every metric plot used in REPORT.md from the TensorBoard event files."""
 
 import os
+from pathlib import Path
 
 import matplotlib
 
@@ -22,7 +23,12 @@ VIOLET = "#4a3aa7"
 RED = "#e34948"
 ORANGE = "#eb6834"
 
-TB = "output/tensorboard"
+# Resolved from this script's own location, so it runs from anywhere: reads
+# the event files from output/ and writes the plots to output/figures/.
+SCRIPT_DIR = Path(__file__).resolve().parent
+OUTPUT_DIR = Path(os.environ.get("FEMTOCHAT_OUTPUT_DIR", SCRIPT_DIR / "output"))
+TB = OUTPUT_DIR / "tensorboard"
+FIGURES_DIR = OUTPUT_DIR / "figures"
 
 # label -> tensorboard event dir (relative to TB)
 RUNS = {
@@ -139,12 +145,12 @@ def sweep_fig(fname, title, series, loss_log=False, labels=False, nudges=None):
     panel(axes[1], "Gradient norm (log scale)", log=True)
     draw(axes[1], series, "train/grad_norm", nudges=nudges, labels=labels)
     finish(fig, len(series))
-    fig.savefig(f"figures/{fname}.png", dpi=160, facecolor=SURFACE)
+    fig.savefig(FIGURES_DIR / f"{fname}.png", dpi=160, facecolor=SURFACE)
     plt.close(fig)
 
 
 def main():
-    os.makedirs("figures", exist_ok=True)
+    os.makedirs(FIGURES_DIR, exist_ok=True)
 
     # --- first sweep, dry profile: optimizer / init / tying ------------------
     sweep_fig(
@@ -191,7 +197,7 @@ def main():
     panel(axes[1], "Gradient norm (log scale)", log=True)
     draw(axes[1], series, "train/grad_norm", labels=True, nudges={"constant-lr": -10})
     finish(fig, len(series))
-    fig.savefig("figures/sweep_dynamics_full.png", dpi=160, facecolor=SURFACE)
+    fig.savefig(FIGURES_DIR / "sweep_dynamics_full.png", dpi=160, facecolor=SURFACE)
     plt.close(fig)
 
     # --- first sweep, dry profile: optimization dynamics ---------------------
@@ -221,7 +227,7 @@ def main():
     panel(axes[1], "Gradient norm (log scale)", log=True)
     draw(axes[1], series, "train/grad_norm", labels=True)
     finish(fig, len(series))
-    fig.savefig("figures/exp_attention_scaling.png", dpi=160, facecolor=SURFACE)
+    fig.savefig(FIGURES_DIR / "exp_attention_scaling.png", dpi=160, facecolor=SURFACE)
     plt.close(fig)
 
     # --- follow-up: warmup vs clipping --------------------------------------
@@ -285,10 +291,10 @@ def main():
         )
 
     finish(fig, 4)
-    fig.savefig("figures/exp_warmup_vs_clip.png", dpi=160, facecolor=SURFACE)
+    fig.savefig(FIGURES_DIR / "exp_warmup_vs_clip.png", dpi=160, facecolor=SURFACE)
     plt.close(fig)
 
 
 if __name__ == "__main__":
     main()
-    print("figures written to figures/")
+    print(f"figures written to {FIGURES_DIR}")

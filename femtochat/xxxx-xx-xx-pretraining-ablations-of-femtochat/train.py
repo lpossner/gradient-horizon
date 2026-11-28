@@ -28,14 +28,20 @@ load_dotenv(override=True)
 
 
 ## PATHS
-INPUT_DIR: str = str(Path.cwd() / "FineWeb-edu_sample_10BT")
-OUTPUT_DIR: str = str(Path.cwd() / "output")
+# Everything this script reads or writes sits beside it: input/ holds the
+# corpus and output/ holds runs, checkpoints and tensorboard events. Resolved
+# from the script's own location, so it behaves the same however it is
+# invoked. Override with FEMTOCHAT_INPUT_DIR / FEMTOCHAT_OUTPUT_DIR on a
+# machine where the corpus lives elsewhere (e.g. Kaggle's read-only input).
+SCRIPT_DIR: Path = Path(__file__).resolve().parent
+INPUT_DIR: str = os.environ.get("FEMTOCHAT_INPUT_DIR", str(SCRIPT_DIR / "input"))
+OUTPUT_DIR: str = os.environ.get("FEMTOCHAT_OUTPUT_DIR", str(SCRIPT_DIR / "output"))
 
 Path(OUTPUT_DIR).mkdir(parents=True, exist_ok=True)
-TOKENIZER_STATE_PATH: str = f"{INPUT_DIR}/tokenizer_state.pkl"
-TRAIN_TOKENS_GZ_PATH: str = f"{INPUT_DIR}/train.bin.gz"
+TOKENIZER_STATE_PATH: str = f"{INPUT_DIR}/FineWeb-edu_sample_10BT/tokenizer_state.pkl"
+TRAIN_TOKENS_GZ_PATH: str = f"{INPUT_DIR}/FineWeb-edu_sample_10BT/train.bin.gz"
 TRAIN_TOKENS_INDEX_PATH: str = f"{OUTPUT_DIR}/train.rgidx"
-VAL_TOKENS_GZ_PATH: str = f"{INPUT_DIR}/val.bin.gz"
+VAL_TOKENS_GZ_PATH: str = f"{INPUT_DIR}/FineWeb-edu_sample_10BT/val.bin.gz"
 VAL_TOKENS_INDEX_PATH: str = f"{OUTPUT_DIR}/val.rgidx"
 TOKENS_DTYPE: type[np.uint16] = np.uint16
 

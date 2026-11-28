@@ -3,7 +3,7 @@
 Small-scale experiments on `femtochat`, a from-scratch nanoGPT-style decoder,
 reproducing classic LLM pretraining failure modes and tricks. Each run changes
 one setting against a matched control; plots are regenerated from the training
-event files by `make_figures.py` into `figures/`.
+event files by `make_figures.py` into `output/figures/`.
 
 ## Setup
 
@@ -41,7 +41,7 @@ Base: `dry` profile.
 | `init_std` → 1/√128 = 0.088 | 7.49 | 7.49 | 1.51 | **no better** than 0.02 |
 | untie input/output embeddings | 7.22 | 7.21 | 1.27 | negligible |
 
-![Optimizer, initialization & weight tying](figures/sweep_optimizer_init.png)
+![Optimizer, initialization & weight tying](output/figures/sweep_optimizer_init.png)
 
 `init_std=0.5` saturates the pre-softmax logits and never recovers. Shrinking
 init costs ~0.18 loss (`0.002` and `1/√emb_dim` = `0.088` both lose to the flat
@@ -59,7 +59,7 @@ Base: `full` profile.
 | post-norm placement | 5.35 | 5.38 | 1.53 | fine at 8 layers — in fact the best loss here |
 | post-norm + `residual_scale_init=False` | 6.78 | 6.78 | 41.8 | **invalid** — duplicate of the post-norm run (below) |
 
-![Architecture](figures/sweep_architecture_full.png)
+![Architecture](output/figures/sweep_architecture_full.png)
 
 `no-residual` caps at ~7.58 by step 300 and never improves over the remaining
 700 steps — the model stops learning, exactly what residuals prevent. `no-norm`
@@ -80,7 +80,7 @@ Base: `full` profile.
 | weight decay → L2-in-loss | 7.69 | 7.29 | 84.1 | **confirmed**: far higher gradient norm than decoupled decay |
 | LR schedule → constant | 4.73 | 4.76 | 2.84 | **reversed**: beats cosine decay decisively |
 
-![Weight decay & LR schedule](figures/sweep_dynamics_full.png)
+![Weight decay & LR schedule](output/figures/sweep_dynamics_full.png)
 
 *The L2 run's train loss includes its penalty term (starts at ~420), so
 validation loss is the fair comparison — what the left panel plots.*
@@ -106,7 +106,7 @@ saturate softmax. The two configurations bracket that boundary:
 | `full`, head_dim 384 (`--n-heads 1`), `init_std=0.05`, 300 steps, scaled | **6.36** | **6.36** | 3.0 | 3.0 |
 | `full`, head_dim 384 (`--n-heads 1`), `init_std=0.05`, 300 steps, **unscaled** | 7.15 | 7.14 | **73.1** | 48.8 |
 
-![Attention scaling (wide head)](figures/exp_attention_scaling.png)
+![Attention scaling (wide head)](output/figures/exp_attention_scaling.png)
 
 At small width the factor is irrelevant. With head width 64 → 384 and `init_std`
 0.02 → 0.05 pushed together, the effect is decisive: the unscaled run's gradient
@@ -129,7 +129,7 @@ is large enough; single-factor pushes are not enough:
 | 16 → 48 layers, post-norm, `lr=0.05` | 7.54 / 7.61 | no instability |
 | 48 layers + post-norm + `init_std=0.1` + `lr=0.3` | see below | **breaks** |
 
-![Small-scale checks](figures/sweep_dynamics_dry.png)
+![Small-scale checks](output/figures/sweep_dynamics_dry.png)
 
 Neither norm placement runs away at depth on its own; breaking needs several
 factors stacked — post-norm, 48 layers, `init_std=0.1`, and `lr=0.3` (600× the
@@ -143,7 +143,7 @@ protections:
 | Warmup only (`30` steps) | 14.9 (step 1 only) | 8.5 | stable |
 | Both | 14.9 | 8.5 | stable |
 
-![Gradient clipping vs warmup](figures/exp_warmup_vs_clip.png)
+![Gradient clipping vs warmup](output/figures/exp_warmup_vs_clip.png)
 
 **Warmup prevents the spike; clipping does not.** Without either, loss jumps from
 ~10 at step 1 to 53.4 by step 3; adding clipping leaves it essentially identical

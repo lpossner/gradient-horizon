@@ -1,6 +1,10 @@
 import subprocess
 import sys
 import time
+from pathlib import Path
+
+# Resolved from this script's own location, so the sweep runs from anywhere.
+TRAIN_SCRIPT = Path(__file__).resolve().parent / "train.py"
 
 # Each entry names one lesson from a SOTA-training postmortem and the flag
 # overrides that reproduce it against train.py's defaults (pre-norm AdamW,
@@ -83,7 +87,7 @@ RUNS: list[dict] = [
 
 def build_argv(profile: str, run_label: str, wandb_group: str, flags: dict) -> list[str]:
     argv = [
-        "train.py",
+        str(TRAIN_SCRIPT),
         "--profile",
         profile,
         "--run-label",

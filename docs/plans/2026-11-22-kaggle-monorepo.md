@@ -47,7 +47,7 @@ The blog repo has uncommitted work in flight. It must be committed before a subt
 **Files:**
 - Modify: `_config.yml` (exclude list, ~line 218)
 - Modify: `.github/workflows/pages-deploy.yml` (paths-ignore, ~line 6)
-- Verify only: `_posts/2026-10-31-introduction-to-femtochat.md`, `_posts/2026-11-15-architechture-of-femtochat.md`
+- Verify only: `_posts/2026-10-31-introduction-to-femtochat.md`, `_posts/2026-11-15-architecture-of-femtochat.md`
 
 **Interfaces:**
 - Consumes: nothing.
@@ -60,7 +60,7 @@ The repo has three modified files (a tagline change in `_config.yml` and edits t
 ```bash
 cd /Users/lpossner/Projects/lpossner.github.io/gradient-horizon
 git status --porcelain
-git add _config.yml _posts/2026-10-31-introduction-to-femtochat.md _posts/2026-11-15-architechture-of-femtochat.md
+git add _config.yml _posts/2026-10-31-introduction-to-femtochat.md _posts/2026-11-15-architecture-of-femtochat.md
 git commit -m "Update tagline and revise posts"
 ```
 
@@ -461,7 +461,7 @@ git commit -m "Add sync_kaggle.sh for notebook and figure sync"
 Proves the figure path end to end before the sweep post depends on it.
 
 **Files:**
-- Modify: `_posts/2026-11-15-architechture-of-femtochat.md` (or a new draft post)
+- Modify: `_posts/2026-11-15-architecture-of-femtochat.md` (or a new draft post)
 
 **Interfaces:**
 - Consumes: `assets/img/femtochat/*.png` from Task 4 Step 7.

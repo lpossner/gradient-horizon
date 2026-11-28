@@ -46,12 +46,20 @@ wheels/
 # Superpowers scratch state
 .superpowers/
 
-# Project data
+# Project data (the corpus lives in femtochat/input/; nothing under it is tracked)
 data/
 FineWeb-edu_sample_10BT/
+femtochat/input/
 
-# Training output
-output/
+# Training output. Everything under a post's output/ is ignored EXCEPT the
+# plots, which make_figures.py writes to output/figures/ and the blog copies
+# from there. The pattern must be spelled femtochat/**/output/* -- a bare
+# `output/` is unanchored (trailing slash only) and would ignore every
+# directory named output anywhere, while a bare `output/*` is anchored to the
+# repo root and would match none of them.
+femtochat/**/output/*
+!femtochat/**/output/figures/
+!femtochat/**/output/figures/*.png
 
 # Secrets
 .env

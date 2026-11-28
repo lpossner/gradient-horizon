@@ -29,8 +29,13 @@ set -euo pipefail
 
 REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 NOTEBOOKS_DIR="$REPO_ROOT/femtochat/notebooks"
+# Fetched kernel outputs land here, one directory per kernel.
 OUTPUT_DIR="$REPO_ROOT/femtochat/output"
-FIGURES_SRC="$REPO_ROOT/femtochat/figures"
+# Per-post folders are named <YYYY-MM-DD|placeholder>-<post>. Figures live
+# beside the code that produced them, under that post's output/figures/.
+# Nothing here is post-specific: the first one that has plots wins, so a
+# second post needs no change to this script.
+FIGURES_SRC="$(ls -d "$REPO_ROOT"/femtochat/*/output/figures 2>/dev/null | head -n 1)"
 FIGURES_DST="$REPO_ROOT/assets/img/femtochat"
 
 # Kernels this script manages. The two superseded kernels

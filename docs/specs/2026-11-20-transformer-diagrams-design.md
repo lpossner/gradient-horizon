@@ -1,7 +1,7 @@
 # Transformer diagrams: explicit residual paths and positional embeddings
 
 Date: 2026-11-20
-Post: `_posts/2026-11-15-architechture-of-femtochat.md`
+Post: `_posts/2026-11-15-architecture-of-femtochat.md`
 Target: the two ` ```mermaid ` blocks in that post
 
 ## Intent
