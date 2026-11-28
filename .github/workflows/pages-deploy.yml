@@ -4,14 +4,21 @@ on:
     branches:
       - main
       - master
-    paths-ignore:
-      - .gitignore
-      - README.md
-      - LICENSE
-      - femtochat/**
-      - docs/**
-      - tools/**
-      - _drafts/**
+    # An allowlist, not a denylist: a change that matters must name its path
+    # here. Figures are the case that made this necessary -- they live under
+    # femtochat/, which the old paths-ignore dropped wholesale, so regenerating
+    # a plot never triggered a deploy and the site kept serving the old image.
+    paths:
+      - "**"
+      - "!femtochat/**"
+      - "!docs/**"
+      - "!tools/**"
+      - "!_drafts/**"
+      - "!.gitignore"
+      - "!README.md"
+      - "!LICENSE"
+      # ...except a post's plots, which the site publishes.
+      - "femtochat/**/output/figures/**"
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -48,6 +55,13 @@ jobs:
         with:
           ruby-version: 3.4
           bundler-cache: true
+
+      # assets/img/femtochat/ is a build product of the post folders, not
+      # something a human edits. Copying it here means the published site is
+      # built from the committed plots even if the local sync was skipped --
+      # the pre-commit hook does the same copy, this is the guarantee.
+      - name: Sync post figures
+        run: bash tools/sync_kaggle.sh figures
 
       - name: Build site
         run: bundle exec jekyll b -d "_site${{ steps.pages.outputs.base_path }}"
